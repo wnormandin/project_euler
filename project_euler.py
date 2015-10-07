@@ -140,13 +140,8 @@ def problem_8():
 	start = time.clock()
 	val = '7316717653133062491922511967442657474235534919493496983520312774506326239578318016984801869478851843858615607891129494954595017379583319528532088055111254069874715852386305071569329096329522744304355766896648950445244523161731856403098711121722383113622298934233803081353362766142828064444866452387493035890729629049156044077239071381051585930796086670172427121883998797908792274921901699720888093776657273330010533678812202354218097512545405947522435258490771167055601360483958644670632441572215539753697817977846174064955149290862569321978468622482839722413756570560574902614079729686524145351004748216637048440319989000889524345065854122758866688116427171479924442928230863465674813919123162824586178664583591245665294765456828489128831426076900422421902267105562632111110937054421750694165896040807198403850962455444362981230987879927244284909188845801561660979191338754992005240636899125607176060588611646710940507754100225698315520005593572972571636269561882670428252483600823257530420752963450'
 	res = [val[i:i+13] for i in range(len(val)-13)]
-	mx = max(sum(
-	for v in res:
-		x=sum([int(j) for j in v])
-		if x > y[1]:
-			y[0]=v
-			y[1]=x
-	print y[0]
+	mx = max((k) for k in val)
+
 	print 'Took {} seconds'.format(time.clock()-start)
 
 #******************************PROBLEM 9********************************
@@ -172,7 +167,9 @@ def problem_9():
 # Find the sum of all the primes below two million.
 
 def problem_10():
-	pass
+	start = time.clock()
+	print sum(primes1(2000000))
+	print 'Took {} seconds.'.format(time.clock()-start)
 	
 #******************************PROBLEM 11*******************************
 # What is the greatest product of four adjacent numbers in the same
@@ -237,6 +234,14 @@ def primes(n): # simple Sieve of Eratosthenes
 	sieve = set(sum([range(q*q, n+1, q+q) for q in odds],[]))
 	return [2] + [p for p in odds if p not in sieve]
 
+# Faster sieve implementation
+def primes1(n):
+	sieve = [True] * (n/2)
+	for i in xrange(3,int(n**0.5)+1,2):
+		if sieve[i/2]:
+			sieve[i*i/2::i] = [False] * ((n-i*i-1)/(2*i)+1)
+	return [2] + [2*i+1 for i in xrange(1,n/2) if sieve[i]]
+
 # Returns a fibonacci sequence up to n
 def gen_fib(n):
 	result = [1, 2]
@@ -244,5 +249,9 @@ def gen_fib(n):
 		result.extend(result[-2]+result[-1])
 	return result
 	
+# Returns a product of all elements in an iterable
+def prod(iterable):
+    return reduce(operator.mul, iterable, 1)
+	
 if __name__ == '__main__':
-	problem_8()
+	problem_9()
