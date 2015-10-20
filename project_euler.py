@@ -243,7 +243,7 @@ def prod(iterable):
 
 def run_prob(method):
 	start = time.clock()
-	print 'Executing {}'.format(method)  # Prints the function object
+	print 'Executing {}'.format(method.__name__)
 	print 'Answer : {}'.format(method()) # Executes the function 
 	print 'Took {} seconds.'.format(time.clock()-start)
 
