@@ -256,6 +256,8 @@ if __name__ == '__main__':
 	while True:
 		# Prompt for user's choice
 		func = 'problem_{}'.format(raw_input('Select a problem Number (q to quit):'))
+		
+		# Quit condition
 		if func in ('problem_q', 'problem_Q'):
 			break
 			
