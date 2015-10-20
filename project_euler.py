@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 # Project Euler problem file
 import time
 import math
@@ -7,10 +8,10 @@ import math
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!PROBLEMS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 #*******************************PROBLEM 1*******************************
-#If we list all the natural numbers below 10 that are multiples of 3 or 5, 
-#we get 3, 5, 6 and 9. The sum of these multiples is 23.
+# If we list all the natural numbers below 10 that are multiples of 3 or 5, 
+# we get 3, 5, 6 and 9. The sum of these multiples is 23.
 #
-#Find the sum of all the multiples of 3 or 5 below 1000.
+# Find the sum of all the multiples of 3 or 5 below 1000.
 
 def problem_1():
 	return sum([n for n in range(1000) if (n % 3 == 0 or n % 5 == 0)])
@@ -63,11 +64,11 @@ def problem_4():
 	return s
 	
 #*******************************PROBLEM 5*******************************
-#2520 is the smallest number that can be divided by each of the numbers 
-#from 1 to 10 without any remainder.
+# 2520 is the smallest number that can be divided by each of the numbers 
+# from 1 to 10 without any remainder.
 #
-#What is the smallest positive number that is evenly divisible by all of 
-#the numbers from 1 to 20?
+# What is the smallest positive number that is evenly divisible by all of 
+# the numbers from 1 to 20?
 
 def problem_5():
 	s = range(1, 21)
@@ -83,26 +84,26 @@ def problem_5():
 	return n
 
 #*******************************PROBLEM 6*******************************
-#The sum of the squares of the first ten natural numbers is,
+# The sum of the squares of the first ten natural numbers is,
 #
-#12 + 22 + ... + 102 = 385
-#The square of the sum of the first ten natural numbers is,
+# 12 + 22 + ... + 102 = 385
+# The square of the sum of the first ten natural numbers is,
 #
-#(1 + 2 + ... + 10)2 = 552 = 3025
-#Hence the difference between the sum of the squares of the first ten 
-#natural numbers and the square of the sum is 3025 − 385 = 2640.
+# (1 + 2 + ... + 10)2 = 552 = 3025
+# Hence the difference between the sum of the squares of the first ten 
+# natural numbers and the square of the sum is 3025 − 385 = 2640.
 #
-#Find the difference between the sum of the squares of the first one 
-#hundred natural numbers and the square of the sum.
+# Find the difference between the sum of the squares of the first one 
+# hundred natural numbers and the square of the sum.
 
 def problem_6():
 	return sum(i for i in range(101))**2 - sum(i**2 for i in range(101))
 	
 #*******************************PROBLEM 7*******************************
-#By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can 
-#see that the 6th prime is 13.
+# By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can 
+# see that the 6th prime is 13.
 #
-#What is the 10,001st prime number?
+# What is the 10,001st prime number?
 
 def problem_7():
 	n = 3
@@ -168,6 +169,7 @@ def problem_11():
 
 def problem_12():
 	pass
+	
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!FUNCTIONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 # Problem 11 matrix calculations
@@ -181,6 +183,8 @@ def grid_calc(grid):
 			sums.append(prod([grid[y+n][x+3-n] for n in range(4)]))
 	return max(sums)
 
+# Returns true if the passed a,b vals form a pythagorean triplet with
+# a + b + c = 1000
 def test_triplet(a, b):
 	csq = a**2 + b**2
 	c = math.sqrt(csq)
@@ -208,12 +212,12 @@ def is_prime(n):
 	return True
 
 # Returns a list of primes up to n
-def primes(n): # simple Sieve of Eratosthenes 
+def primes(n): # simple Sieve of Eratosthenes (slow)
 	odds = xrange(3, n+1, 2)
 	sieve = set(sum([range(q*q, n+1, q+q) for q in odds],[]))
 	return [2] + [p for p in odds if p not in sieve]
 
-# Faster sieve implementation
+# Faster sieve implementation up to n
 def primes1(n):
 	sieve = [True] * (n/2)
 	for i in xrange(3,int(n**0.5)+1,2):
@@ -228,8 +232,8 @@ def gen_fib(n):
 		result.extend(result[-2]+result[-1])
 	return result
 	
-# Returns a product of all elements in an iterable
-def prod(iterable):
+# Returns a product of all elements in an iterable (cast integers)
+def prod(iterable): 
 	prdct=1
 	for item in iterable:
 		prdct*=int(item)
@@ -251,7 +255,10 @@ if __name__ == '__main__':
 	
 	while True:
 		# Prompt for user's choice
-		func = 'problem_{}'.format(raw_input('Select a problem Number :'))
+		func = 'problem_{}'.format(raw_input('Select a problem Number (q to quit):'))
+		if func in ('q', 'Q'):
+			break
+			
 		method = possibles.get(func)
 		
 		# Error if the choice is not a valid member function
@@ -260,4 +267,3 @@ if __name__ == '__main__':
 		# Else execute the specified method
 		else:
 			run_prob(method)
-			break
