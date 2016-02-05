@@ -29,10 +29,8 @@ def problem_1():
 def problem_2():
 	s = 0
 	fib = gen_fib(4000000)
-	for f in fib:
-		if f % 2 ==0:
-			s += f
-	return s
+	return sum([f for f in fib if f % 2 == 0])
+
 
 #*******************************PROBLEM 3*******************************
 # The prime factors of 13195 are 5, 7, 13 and 29.
