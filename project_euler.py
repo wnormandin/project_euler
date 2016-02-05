@@ -27,9 +27,7 @@ def problem_1():
 # not exceed four million, find the sum of the even-valued terms.
 
 def problem_2():
-	s = 0
-	fib = gen_fib(4000000)
-	return sum([f for f in fib if f % 2 == 0])
+	return sum([f for f in gen_fib(4000000) if f % 2 == 0])
 
 
 #*******************************PROBLEM 3*******************************
